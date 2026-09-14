@@ -1,0 +1,39 @@
+import { useEffect, useRef, type ReactNode } from "react";
+
+interface Props {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+}
+
+export default function ScrollReveal({ children, delay = 0, className = "" }: Props) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            el.classList.add("is-visible");
+            obs.disconnect();
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`reveal ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
