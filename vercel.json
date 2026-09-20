@@ -1,4 +1,3 @@
-# Vercel SPA fallback
 {
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
