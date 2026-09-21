@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import {
-  ArrowRight,
   Copy,
   Check,
   Cpu,
@@ -11,10 +10,13 @@ import {
   Trash2,
   Database,
   Sparkles,
+  CircleCheck,
+  ArrowRight,
 } from "lucide-react";
-import { getAgent } from "../agents/config";
+import { getAgent, AGENTS } from "../agents/config";
 import { runAgentStreaming, hasApiKey, AUTH_MESSAGE, MODEL } from "../lib/gemini";
 import { GEO_SAMPLES, SUPPORT_TICKETS, SKU_ROWS } from "../data/samples";
+import { AgentLogo } from "../agents/logos";
 
 interface Run {
   id: number;
@@ -49,8 +51,6 @@ function buildDatasetPrompt(agentId: string): string {
 export default function AgentStudio() {
   const { id = "geoengine" } = useParams();
   const agent = getAgent(id);
-  const Icon = agent.icon;
-  const IconNext = agent.icon;
 
   const [input, setInput] = useState("");
   const [runs, setRuns] = useState<Run[]>([]);
@@ -140,22 +140,34 @@ export default function AgentStudio() {
   const last = runs[runs.length - 1];
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-10">
+    <div className="mx-auto max-w-6xl px-4 py-8 md:px-6 md:py-10">
       {/* Header */}
-      <div className="flex items-start gap-5">
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
         <span
-          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl neon-ring"
-          style={{ background: `${agent.accent}1a`, color: agent.accent }}
+          className="logo-tile flex h-16 w-16 shrink-0 items-center justify-center"
+          style={{ borderColor: `${agent.accent}55`, boxShadow: `0 0 34px -10px ${agent.accent}88` }}
         >
-          <Icon className="h-7 w-7" />
+          <AgentLogo id={agent.id} size={40} />
         </span>
         <div className="min-w-0">
-          <p className="font-code text-xs text-[#8E8E93]">{agent.code} · module</p>
-          <h1 className="font-display text-4xl uppercase tracking-tight">{agent.name}</h1>
-          <p className="mt-1 text-sm uppercase tracking-[0.2em] text-[#FF2E3A]">
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
+              {agent.code} · autonomous module
+            </p>
+            <span
+              className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-white"
+              style={{ background: `${agent.accent}26`, color: agent.accent }}
+            >
+              <CircleCheck className="h-3 w-3" /> Free trial · one per agent
+            </span>
+          </div>
+          <h1 className="mt-1 font-display text-3xl uppercase tracking-tight md:text-5xl">
+            {agent.name}
+          </h1>
+          <p className="mt-1 font-mono text-xs uppercase tracking-[0.2em]" style={{ color: agent.accent }}>
             {agent.tagline}
           </p>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#A7A7AC]">
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">
             {agent.blurb}
           </p>
         </div>
@@ -163,11 +175,13 @@ export default function AgentStudio() {
 
       <div className="mt-8 grid gap-6 lg:grid-cols-2">
         {/* Composer */}
-        <div className="glass rounded-2xl p-5">
-          <div className="flex items-center justify-between">
-            <label className="text-sm font-semibold text-white">{agent.inputLabel}</label>
-            <span className="flex items-center gap-1.5 rounded-full bg-white/5 px-2.5 py-1 text-[10px] uppercase tracking-wider text-[#8E8E93]">
-              <Cpu className="h-3 w-3 text-[#E50914]" /> {MODEL}
+        <div className="panel p-5">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <label className="font-head text-sm font-semibold text-white">
+              {agent.inputLabel}
+            </label>
+            <span className="flex items-center gap-1.5 rounded-full bg-white/5 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-muted">
+              <Cpu className="h-3 w-3" style={{ color: agent.accent }} /> {MODEL}
             </span>
           </div>
 
@@ -176,27 +190,32 @@ export default function AgentStudio() {
             onChange={(e) => setInput(e.target.value)}
             placeholder={agent.inputPlaceholder}
             rows={8}
-            className="mt-3 w-full resize-y rounded-xl border border-[rgba(255,255,255,0.1)] bg-[#101012] p-4 font-code text-sm text-white placeholder:text-[#5c5c62] focus:border-[#E50914]/60 focus:outline-none focus:ring-2 focus:ring-[#E50914]/20"
+            className="mt-3 w-full resize-y rounded-xl border border-line bg-void p-4 font-mono text-sm text-white placeholder:text-muted/60 focus:border-haze/60 focus:outline-none focus:ring-2 focus:ring-haze/20"
           />
 
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <button
               onClick={injectSample}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-1.5 text-xs text-[#A7A7AC] transition hover:bg-white/10"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-1.5 text-xs text-ink-soft transition hover:bg-white/10"
             >
-              <Sparkles className="h-3.5 w-3.5" /> Inject sample
+              <Sparkles className="h-3.5 w-3.5" style={{ color: agent.accent }} /> Inject sample
             </button>
             {hasDataset && (
               <button
                 onClick={injectDataset}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-1.5 text-xs text-[#A7A7AC] transition hover:bg-white/10"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-1.5 text-xs text-ink-soft transition hover:bg-white/10"
               >
-                <Database className="h-3.5 w-3.5" /> Inject {agent.id === "geoengine" ? "3 audit sites" : agent.id === "supportops" ? "3 tickets" : "5 SKUs"}
+                <Database className="h-3.5 w-3.5" style={{ color: agent.accent }} />{" "}
+                {agent.id === "geoengine"
+                  ? "Inject 3 audit sites"
+                  : agent.id === "supportops"
+                    ? "Inject 3 tickets"
+                    : "Inject 5 SKUs"}
               </button>
             )}
             <button
               onClick={() => setInput("")}
-              className="ml-auto inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-[#8E8E93] transition hover:text-white"
+              className="ml-auto inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-muted transition hover:text-white"
             >
               <Trash2 className="h-3.5 w-3.5" /> Clear
             </button>
@@ -205,43 +224,47 @@ export default function AgentStudio() {
           <button
             onClick={() => run()}
             disabled={streaming || !input.trim()}
-            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#E50914] px-6 py-3.5 font-semibold text-white shadow-[0_0_36px_-8px_rgba(229,9,20,0.9)] transition hover:bg-[#FF2E3A] disabled:cursor-not-allowed disabled:opacity-40"
+            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-haze px-6 py-3.5 font-head font-semibold text-white shadow-[0_0_36px_-10px_rgba(255,46,68,0.9)] transition hover:bg-[#FF4B5E] disabled:cursor-not-allowed disabled:opacity-40"
           >
             <Play className="h-4 w-4" />
-            {streaming ? "Agent is reasoning…" : `Run ${agent.name}`}
+            {streaming ? "Agent is reasoning…" : `Launch ${agent.name} trial`}
             {!streaming && <ArrowRight className="h-4 w-4" />}
           </button>
         </div>
 
         {/* Output panel */}
-        <div ref={outRef} className="glass-strong h-[460px] overflow-y-auto rounded-2xl p-5">
+        <div
+          ref={outRef}
+          className="panel h-[440px] overflow-y-auto p-5 md:h-[460px]"
+        >
           {!last && (
             <div className="flex h-full flex-col items-center justify-center text-center">
-              <IconNext className="h-12 w-12 text-[#E50914]/40" />
-              <p className="mt-4 font-hand text-2xl text-[#A7A7AC]">
+              <div className="logo-tile flex h-16 w-16 items-center justify-center opacity-80">
+                <AgentLogo id={agent.id} size={40} stroke={false} />
+              </div>
+              <p className="mt-5 font-head text-xl font-semibold uppercase tracking-wide text-ink-soft">
                 Output will render here
               </p>
-              <p className="mt-1 max-w-xs text-xs text-[#5c5c62]">
-                Paste context, inject a sample, or pull the bundled dataset, then launch {agent.name}.
+              <p className="mt-2 max-w-xs text-xs text-muted">
+                Paste your context, inject a sample, or pull the bundled dataset, then
+                launch your free trial of {agent.name}.
               </p>
             </div>
           )}
 
           {runs.map((r) => (
             <div key={r.id} className="mb-6">
-              <div className="flex items-center gap-2 text-[11px] text-[#8E8E93]">
+              <div className="flex items-center gap-2 font-mono text-[11px] text-muted">
                 <span
                   className={`h-2 w-2 rounded-full ${
                     r.status === "done"
-                      ? "bg-emerald-400"
+                      ? "bg-mint"
                       : r.status === "error"
-                        ? "bg-[#E50914]"
-                        : "animate-pulse bg-[#E50914]"
+                        ? "bg-haze"
+                        : "animate-pulse bg-haze"
                   }`}
                 />
-                <span className="font-code">
-                  {r.status === "running" ? "streaming…" : r.status}
-                </span>
+                <span>{r.status === "running" ? "streaming…" : r.status}</span>
                 <span className="ml-auto flex items-center gap-1">
                   <Clock className="h-3 w-3" />
                   {new Date(r.ts).toLocaleTimeString()}
@@ -249,18 +272,18 @@ export default function AgentStudio() {
                 {r.status === "done" && (
                   <button
                     onClick={() => copy(r)}
-                    className="ml-2 inline-flex items-center gap-1 text-[#8E8E93] transition hover:text-white"
+                    className="ml-2 inline-flex items-center gap-1 text-muted transition hover:text-white"
                     title="Copy output"
                   >
                     {copied === r.id ? (
-                      <Check className="h-3.5 w-3.5 text-emerald-400" />
+                      <Check className="h-3.5 w-3.5 text-mint" />
                     ) : (
                       <Copy className="h-3.5 w-3.5" />
                     )}
                   </button>
                 )}
               </div>
-              <div className="md-body mt-3 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#0F0F11] p-4">
+              <div className="md-body mt-3 rounded-xl border border-line bg-void p-4">
                 <ReactMarkdown>
                   {r.output ||
                     (r.status === "running" ? "*Reasoning…*" : "*No output*")}
@@ -273,31 +296,37 @@ export default function AgentStudio() {
 
       {/* Agent switcher */}
       <div className="mt-10">
-        <p className="text-[11px] uppercase tracking-[0.25em] text-[#8E8E93]">
-          Switch agents instantly
-        </p>
+        <div className="flex items-center justify-between gap-3">
+          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-muted">
+            switch agents instantly
+          </p>
+          <Link
+            to="/pricing"
+            className="inline-block font-head text-xs font-semibold text-haze transition hover:text-haze-soft"
+          >
+            One plan, all {AGENTS.length} agents →
+          </Link>
+        </div>
         <div className="mt-3 flex flex-wrap gap-2">
-          {(["geoengine", "supportops", "pricepilot", "relevnt", "codebridge", "researchsynth", "testforge", "edgemint", "focusrank", "marketforge", "legalbeacon", "podcastforge", "recruitauditor", "sentienthub"] as const).map(
-            (aid) => {
-              const a = getAgent(aid);
-              const A = a.icon;
-              const active = a.id === agent.id;
-              return (
-                <Link
-                  key={a.id}
-                  to={`/agents/${a.id}`}
-                  className={
-                    active
-                      ? "inline-flex items-center gap-2 rounded-xl bg-[#E50914] px-4 py-2 text-sm font-semibold"
-                      : "inline-flex items-center gap-2 rounded-xl bg-white/5 px-4 py-2 text-sm text-[#A7A7AC] transition hover:bg-white/10 hover:text-white"
-                  }
-                >
-                  <A className="h-4 w-4" />
-                  {a.name}
-                </Link>
-              );
-            }
-          )}
+          {AGENTS.map((a) => {
+            const active = a.id === agent.id;
+            return (
+              <Link
+                key={a.id}
+                to={`/agents/${a.id}`}
+                title={`Run ${a.name} trial`}
+                className={
+                  active
+                    ? "inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-head font-semibold text-white"
+                    : "inline-flex items-center gap-2 rounded-xl bg-white/5 px-3 py-2 text-sm text-ink-soft transition hover:bg-white/10 hover:text-white"
+                }
+                style={active ? { background: a.accent, boxShadow: `0 0 26px -8px ${a.accent}` } : undefined}
+              >
+                <AgentLogo id={a.id} size={20} stroke={false} />
+                <span className="hidden sm:inline">{a.name}</span>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Boxes, Cpu, KeyRound, Terminal, FolderTree, Rocket } from "lucide-react";
 import ScrollReveal from "../components/ScrollReveal";
+import { SuiteLogo } from "../agents/logos";
 
 function Block({
   icon: Icon,
@@ -13,14 +14,14 @@ function Block({
 }) {
   return (
     <ScrollReveal>
-      <div className="rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0B0B0C] p-7">
+      <div className="panel p-7">
         <div className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E50914]/15 text-[#E50914]">
-            <Icon className="h-5 w-5" />
+          <span className="logo-tile flex h-10 w-10 items-center justify-center">
+            <Icon className="h-5 w-5 text-haze" />
           </span>
-          <h2 className="font-condensed text-xl uppercase tracking-wider">{title}</h2>
+          <h2 className="font-head text-xl font-semibold uppercase tracking-wider">{title}</h2>
         </div>
-        <div className="mt-5 text-sm leading-relaxed text-[#A7A7AC]">{children}</div>
+        <div className="mt-5 text-sm leading-relaxed text-ink-soft">{children}</div>
       </div>
     </ScrollReveal>
   );
@@ -46,7 +47,7 @@ Every agent in the suite is the same reliable machine with a different brain:
 1. **Agent registry** (\`agents/config.ts\`) — 14 pinned system prompts, each a distilled version of a focused product.
 2. **Shared runner** (\`lib/gemini.ts\`) — streaming \`generateContentStream\`, deterministic \`temperature\`, graceful API-key guard.
 3. **Provider hook** — swap OpenAI / Groq / Claude by replacing one file.
-4. **QA by design** — rubrics, boundary examples and caveats are baked into every prompt (SSEP discipline).
+4. **QA by design** — rubrics, boundary examples and caveats are baked into every prompt.
 `;
 
 const RUN = `
@@ -68,35 +69,43 @@ vercel --prod                # authenticated CLI
 
 export default function Docs() {
   return (
-    <div className="mx-auto max-w-5xl px-6 py-14">
+    <div className="mx-auto max-w-5xl px-5 py-14 md:px-6">
       <ScrollReveal>
-        <div>
-          <p className="font-hand text-2xl text-[#FF2E3A]">read the manual</p>
-          <h1 className="font-display text-4xl uppercase tracking-tight md:text-5xl">
-            Docs &amp; architecture
-          </h1>
-          <p className="mt-3 max-w-2xl text-[#A7A7AC]">
-            One codebase, 14 agents, zero duplicated logic. Everything you need to run,
-            fork, or white-label the suite.
-          </p>
+        <div className="flex flex-col gap-5 md:flex-row md:items-center">
+          <span className="logo-tile flex h-16 w-16 shrink-0 items-center justify-center">
+            <SuiteLogo size={40} />
+          </span>
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-haze">
+              read the manual
+            </p>
+            <h1 className="mt-1 font-display text-3xl uppercase tracking-tight md:text-5xl">
+              Docs & architecture
+            </h1>
+            <p className="mt-2 max-w-2xl text-ink-soft">
+              One codebase, 14 agents, zero duplicated logic. Everything you need to
+              run, fork, or white-label the suite.
+            </p>
+          </div>
         </div>
       </ScrollReveal>
 
       <div className="mt-12 space-y-6">
         <Block icon={FolderTree} title="Project structure">
-          <pre className="overflow-x-auto rounded-xl bg-[#101012] p-4 font-code text-xs text-[#d7d7da]">
+          <pre className="overflow-x-auto rounded-xl border border-line bg-void p-4 font-mono text-xs text-ink-soft">
 {`src/
 ├── agents/config.ts        # 14 agent definitions + system prompts
+├── agents/logos.tsx        # bespoke vector logos for the suite + agents
 ├── lib/gemini.ts           # streaming Gemini runner + provider switch
 ├── data/samples.ts         # GEO sites, support tickets, SKU rows
-├── components/             # ParticleField (three.js), Sidebar, Topbar, TiltCard, ScrollReveal
-├── pages/                  # Home · AgentStudio · Pricing · Pitch · Docs
-└── theme/scheme.ts         # on-brand tokens (#0D0D0D / #E50914)`}
+├── components/             # ParticleField, Sidebar, Topbar, TiltCard, ScrollReveal
+├── pages/                  # Home · AgentStudio · Pricing · Docs
+└── theme/scheme.ts         # brand tokens (void / #FF2E44 accent)`}
           </pre>
         </Block>
 
         <Block icon={Cpu} title="Agent architecture">
-          <pre className="overflow-x-auto rounded-xl bg-[#101012] p-4 font-code text-xs text-[#d7d7da]">
+          <pre className="overflow-x-auto rounded-xl border border-line bg-void p-4 font-mono text-xs text-ink-soft">
 {ARCH}
           </pre>
         </Block>
@@ -117,7 +126,7 @@ export default function Docs() {
         </Block>
 
         <Block icon={Terminal} title="Run it yourself">
-          <pre className="overflow-x-auto rounded-xl bg-[#101012] p-4 font-code text-xs text-[#d7d7da]">
+          <pre className="overflow-x-auto rounded-xl border border-line bg-void p-4 font-mono text-xs text-ink-soft">
 {RUN}
           </pre>
         </Block>
@@ -133,12 +142,18 @@ export default function Docs() {
       </div>
 
       <ScrollReveal>
-        <div className="mt-12 text-center">
+        <div className="mt-12 flex flex-wrap justify-center gap-3">
           <Link
             to="/agents/geoengine"
-            className="inline-flex items-center gap-2 rounded-xl bg-[#E50914] px-8 py-3.5 font-semibold transition hover:bg-[#FF2E3A]"
+            className="inline-flex items-center gap-2 rounded-xl bg-haze px-8 py-3.5 font-head font-semibold text-white shadow-[0_0_36px_-10px_rgba(255,46,68,0.9)] transition hover:bg-[#FF4B5E]"
           >
-            Open the suite →
+            Open the suite
+          </Link>
+          <Link
+            to="/pricing"
+            className="inline-flex items-center gap-2 rounded-xl glass px-8 py-3.5 font-head font-semibold transition hover:bg-white/5"
+          >
+            Pricing & trials
           </Link>
         </div>
       </ScrollReveal>

@@ -39,7 +39,7 @@ export const AGENTS: Agent[] = [
     blurb:
       "Audits a website against LLM & RAG-citation best practices and returns a deterministic, scorecard-driven optimization plan.",
     icon: Search,
-    accent: "#E50914",
+    accent: "#FF3B5C",
     inputLabel: "Website text or HTML",
     inputPlaceholder:
       "Paste the page copy or raw HTML you want audited…",
@@ -62,7 +62,7 @@ export const AGENTS: Agent[] = [
     blurb:
       "Ingests a support ticket, classifies tier, diagnoses root cause from logs, drafts a resolution, and flags what to escalate.",
     icon: Headset,
-    accent: "#FF2E3A",
+    accent: "#FF8A3D",
     inputLabel: "Paste the support ticket",
     inputPlaceholder:
       "Ticket description, environment, and log lines…",
@@ -83,7 +83,7 @@ export const AGENTS: Agent[] = [
     blurb:
       "Feeds SKU cost/price/demand data through pricing heuristics and AI analysis to maximize margin without losing velocity.",
     icon: TrendingUp,
-    accent: "#E50914",
+    accent: "#FFC53D",
     inputLabel: "SKU rows (name, cost, price, demand)",
     inputPlaceholder:
       "SKU, segment, unit cost, current price, units sold / month…",
@@ -105,7 +105,7 @@ export const AGENTS: Agent[] = [
     blurb:
       "Scores any piece of content against a target topic for topical-authority readiness and ranks gaps to close first.",
     icon: Radar,
-    accent: "#FF2E3A",
+    accent: "#4DE3FF",
     inputLabel: "Content + target topic",
     inputPlaceholder:
       "Paste the content, then a line: TARGET TOPIC: …",
@@ -126,7 +126,7 @@ export const AGENTS: Agent[] = [
     blurb:
       "Bridges code from one stack to another (JS→TS, Express→FastAPI, jQuery→React, Playwright↔Cypress) with why-nots.",
     icon: GitMerge,
-    accent: "#E50914",
+    accent: "#38BDF8",
     inputLabel: "Source code + target stack",
     inputPlaceholder:
       "Paste code, end with: MIGRATE TO: <stack>",
@@ -147,7 +147,7 @@ export const AGENTS: Agent[] = [
     blurb:
       "Turns messy research notes, abstracts, and references into a structured, cited synthesis with claims + confidence.",
     icon: FlaskConical,
-    accent: "#FF2E3A",
+    accent: "#C084FC",
     inputLabel: "Research notes / abstracts",
     inputPlaceholder:
       "Paste abstracts, findings, or notes — cite sources inline as [1], [2]…",
@@ -168,7 +168,7 @@ export const AGENTS: Agent[] = [
     blurb:
       "Turns a plain-English test scenario into a clean, zero-flaky Playwright or Cypress script with strict locators.",
     icon: Ampersands,
-    accent: "#E50914",
+    accent: "#4EF2BA",
     inputLabel: "Plain-English test scenario",
     inputPlaceholder:
       "Describe the user flow to test… (target: Playwright or Cypress)",
@@ -189,7 +189,7 @@ export const AGENTS: Agent[] = [
     blurb:
       "Turns raw income/expense transactions into a cash-flow diagnosis, a 90-day plan, and an investment tilt.",
     icon: Wallet,
-    accent: "#FF2E3A",
+    accent: "#5EEAD4",
     inputLabel: "Income + expense rows",
     inputPlaceholder:
       "Type (income/expense), category, amount, date…",
@@ -209,7 +209,7 @@ export const AGENTS: Agent[] = [
     blurb:
       "Scores each task by impact & difficulty, applies a cost-of-delay lens, and returns the order you should build your day.",
     icon: ListChecks,
-    accent: "#E50914",
+    accent: "#A3E635",
     inputLabel: "Tasks + (impact 1-10, difficulty 1-10)",
     inputPlaceholder:
       "Task — impact — difficulty (one per line)",
@@ -229,7 +229,7 @@ export const AGENTS: Agent[] = [
     blurb:
       "Generates campaign briefs, localized ad copy, and short-form storyboards for a product in seconds.",
     icon: Megaphone,
-    accent: "#FF2E3A",
+    accent: "#FB7185",
     inputLabel: "Product + audience + goal",
     inputPlaceholder:
       "Product, target audience, campaign goal, budget…",
@@ -249,7 +249,7 @@ export const AGENTS: Agent[] = [
     blurb:
       "Analyzes contracts and legal language for risk clauses, obligations, and red flags — with plain-English briefs.",
     icon: Scale,
-    accent: "#E50914",
+    accent: "#FBBF24",
     inputLabel: "Contract clause or legal query",
     inputPlaceholder:
       "Paste a contract clause, or ask a legal question…",
@@ -270,7 +270,7 @@ export const AGENTS: Agent[] = [
     blurb:
       "Turns a topic into a research summary, a full episode script with intro/critique loops, and broadcast-ready show notes.",
     icon: Mic,
-    accent: "#FF2E3A",
+    accent: "#F472B6",
     inputLabel: "Episode topic + audience",
     inputPlaceholder:
       "Topic, target listener, episode length in minutes…",
@@ -291,7 +291,7 @@ export const AGENTS: Agent[] = [
     blurb:
       "Screens a resume against a job description, emits a compatibility score and a QA-style interview test matrix.",
     icon: UserSearch,
-    accent: "#E50914",
+    accent: "#60A5FA",
     inputLabel: "Job description + resume",
     inputPlaceholder:
       "JOB: <paste role + requirements>\nCANDIDATE: <paste resume>",
@@ -312,7 +312,7 @@ export const AGENTS: Agent[] = [
     blurb:
       "One terminal for concurrent text, image and audio reasoning — describes, transcribes, and decides on mixed inputs.",
     icon: Radio,
-    accent: "#FF2E3A",
+    accent: "#8F7BFF",
     inputLabel: "Mixed input (text / image URL / audio transcript)",
     inputPlaceholder:
       "Paste text, an image URL, or an audio transcript to reason across…",
