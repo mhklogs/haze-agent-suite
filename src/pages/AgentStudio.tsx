@@ -144,21 +144,21 @@ export default function AgentStudio() {
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
         <span
           className="logo-tile flex h-16 w-16 shrink-0 items-center justify-center"
-          style={{ borderColor: `${agent.accent}55`, boxShadow: `0 0 34px -10px ${agent.accent}88` }}
+          style={{ borderColor: "color-mix(in srgb, var(--haze-accent) 30%, transparent)", boxShadow: "0 0 34px -10px color-mix(in srgb, var(--haze-accent) 45%, transparent)" }}
         >
           <AgentLogo id={agent.id} size={40} />
         </span>
         <div className="min-w-0">
           <span
-            className="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-mono text-[10px]"
-            style={{ borderColor: `${agent.accent}55`, color: agent.accent }}
+            className="label-meta inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1"
+            style={{ color: "var(--haze-accent)" }}
           >
             <CircleCheck className="h-3 w-3" /> Free trial included
           </span>
           <h1 className="mt-2 font-display text-4xl leading-tight md:text-5xl">
             {agent.name}
           </h1>
-          <p className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.18em]" style={{ color: agent.accent }}>
+          <p className="label-accent mt-1.5">
             {agent.tagline}
           </p>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">
@@ -181,20 +181,20 @@ export default function AgentStudio() {
             onChange={(e) => setInput(e.target.value)}
             placeholder={agent.inputPlaceholder}
             rows={8}
-            className="mt-3 w-full resize-y rounded-xl border border-line bg-void p-4 font-mono text-sm text-white placeholder:text-muted/60 focus:border-haze/60 focus:outline-none focus:ring-2 focus:ring-haze/20"
+            className="mt-3 w-full resize-y rounded-xl border border-line bg-void p-4 text-sm text-ink placeholder:text-muted/60 focus:border-haze/60 focus:outline-none focus:ring-2 focus:ring-haze/20"
           />
 
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <button
               onClick={injectSample}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-1.5 text-xs text-ink-soft transition hover:bg-white/10"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-black/5 px-3 py-1.5 text-xs text-ink-soft transition hover:bg-black/10"
             >
               <Sparkles className="h-3.5 w-3.5" style={{ color: agent.accent }} /> Inject sample
             </button>
             {hasDataset && (
               <button
                 onClick={injectDataset}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-1.5 text-xs text-ink-soft transition hover:bg-white/10"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-black/5 px-3 py-1.5 text-xs text-ink-soft transition hover:bg-black/10"
               >
                 <Database className="h-3.5 w-3.5" style={{ color: agent.accent }} />{" "}
                 {agent.id === "geoengine"
@@ -206,7 +206,7 @@ export default function AgentStudio() {
             )}
             <button
               onClick={() => setInput("")}
-              className="ml-auto inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-muted transition hover:text-white"
+              className="ml-auto inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-muted transition hover:text-ink"
             >
               <Trash2 className="h-3.5 w-3.5" /> Clear
             </button>
@@ -245,14 +245,12 @@ export default function AgentStudio() {
 
           {runs.map((r) => (
             <div key={r.id} className="mb-6">
-              <div className="flex items-center gap-2 font-mono text-[11px] text-muted">
+              <div className="flex items-center gap-2 label-meta text-[11px] text-muted">
                 <span
                   className={`h-2 w-2 rounded-full ${
                     r.status === "done"
                       ? "bg-mint"
-                      : r.status === "error"
-                        ? "bg-haze"
-                        : "animate-pulse bg-haze"
+                      : "bg-haze"
                   }`}
                 />
                 <span>{r.status === "running" ? "streaming…" : r.status}</span>
@@ -263,7 +261,7 @@ export default function AgentStudio() {
                 {r.status === "done" && (
                   <button
                     onClick={() => copy(r)}
-                    className="ml-2 inline-flex items-center gap-1 text-muted transition hover:text-white"
+                    className="ml-2 inline-flex items-center gap-1 text-muted transition hover:text-ink"
                     title="Copy output"
                   >
                     {copied === r.id ? (
@@ -288,7 +286,7 @@ export default function AgentStudio() {
       {/* Agent switcher */}
       <div className="mt-10">
         <div className="flex items-center justify-between gap-3">
-          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-muted">
+          <p className="label-meta">
             switch agents instantly
           </p>
           <Link
@@ -308,8 +306,8 @@ export default function AgentStudio() {
                 title={`Run ${a.name} trial`}
                 className={
                   active
-                    ? "inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-head font-semibold text-[#17090a]"
-                    : "inline-flex items-center gap-2 rounded-xl bg-white/5 px-3 py-2 text-sm text-ink-soft transition hover:bg-white/10 hover:text-white"
+                    ? "inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-head font-semibold text-[#F9F8F6]"
+                    : "inline-flex items-center gap-2 rounded-xl bg-black/5 px-3 py-2 text-sm text-ink-soft transition hover:bg-black/10 hover:text-ink"
                 }
                 style={active ? { background: a.accent } : undefined}
               >

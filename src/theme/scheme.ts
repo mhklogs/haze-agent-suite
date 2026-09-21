@@ -1,19 +1,19 @@
 export const scheme = {
-  bg: "#0D0D0D",
-  panel: "#141416",
-  accent: "#E50914",
-  accentSoft: "#FF2E3A",
-  amber: "#FF2E37",
-  muted: "#8E8E93",
-  line: "rgba(255,255,255,0.08)",
-  text: "#FFFFFF",
-  textMuted: "#A7A7AC",
+  bg: "#F9F8F6",
+  panel: "#FFFFFF",
+  accent: "#14337A",
+  accentSoft: "#2F4C9E",
+  amber: "#14337A",
+  muted: "#8A8578",
+  line: "rgba(229, 224, 214, 0.7)",
+  text: "#1A1A1A",
+  textMuted: "#57534E",
 } as const;
 
 export const fonts = {
-  display: "Anton",
-  condensed: "Bebas Neue",
-  hand: "Caveat",
-  body: "Inter",
-  code: "Fira Code",
+  display: "Cinzel",
+  condensed: "Cinzel",
+  hand: "Plus Jakarta Sans",
+  body: "Plus Jakarta Sans",
+  code: "ui-monospace",
 } as const;

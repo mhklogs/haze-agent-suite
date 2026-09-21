@@ -168,7 +168,7 @@ function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div className="text-center">
       <p className="font-display text-4xl leading-none md:text-5xl">{value}</p>
-      <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">{label}</p>
+      <p className="label-meta mt-2">{label}</p>
     </div>
   );
 }
@@ -178,25 +178,25 @@ export default function Home() {
     <div>
       {/* ================= HERO ================= */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="aurora -top-40 left-1/4 h-96 w-96 bg-[#E2574B]/25" />
-          <div className="aurora top-8 right-[6%] h-80 w-80 bg-[#8FAECF]/18" />
+        <div className="absolute inset-x-0 top-0 pointer-events-none">
+          <div className="band-rule left-1/2 top-6 w-[min(720px,90%)] -translate-x-1/2" />
+          <div className="band-wash -top-24 left-1/2 -translate-x-1/2" />
         </div>
 
         <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-20 text-center md:px-6 md:pt-28">
           <ScrollReveal>
             <div className="inline-flex items-center gap-2.5 rounded-full border border-line bg-panel px-4 py-1.5">
               <span className="pulse-dot flex h-2 w-2 rounded-full bg-haze" />
-              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+              <span className="label-accent">
                 Haze Agent Suite
               </span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal delay={70}>
-            <h1 className="mx-auto mt-8 max-w-4xl font-display text-5xl leading-[1.06] md:text-7xl">
+            <h1 className="mx-auto mt-8 max-w-4xl font-display text-4xl leading-[1.08] md:text-5xl">
               Your team runs on{" "}
-              <em className="text-haze-soft">fourteen focused agents.</em>
+              <em className="text-haze not-italic">fourteen focused agents.</em>
             </h1>
           </ScrollReveal>
 
@@ -218,7 +218,7 @@ export default function Home() {
                 View pricing
               </Link>
             </div>
-            <p className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+            <p className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 label-meta">
               <span className="inline-flex items-center gap-1.5">
                 <CircleCheck className="h-3.5 w-3.5 text-mint" /> one free trial per agent
               </span>
@@ -276,19 +276,19 @@ export default function Home() {
                   <div className="flex items-start justify-between">
                     <span
                       className="logo-tile flex h-14 w-14 items-center justify-center border"
-                      style={{ borderColor: `${agent.accent}44` }}
+                      style={{ borderColor: "var(--line)" }}
                     >
                       <AgentLogo id={agent.id} size={34} />
                     </span>
                   </div>
                   <h3 className="mt-5 font-display text-2xl leading-snug">{agent.name}</h3>
-                  <p className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.16em]" style={{ color: agent.accent }}>
+                  <p className="label-accent mt-1.5">
                     {agent.tagline}
                   </p>
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">{agent.blurb}</p>
 
                   <div className="mt-6 flex items-center justify-between border-t border-line-soft pt-4">
-                    <span className="text-sm font-semibold" style={{ color: agent.accent }}>
+                    <span className="text-sm font-semibold text-haze">
                       Run free trial
                     </span>
                     <ArrowRight
@@ -368,7 +368,7 @@ export default function Home() {
                 <div className="panel h-full p-7">
                   <div className="flex items-baseline justify-between">
                     <span className="font-display text-4xl text-muted">{s.n}</span>
-                    <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+                    <span className="label-meta">
                       step {s.n}
                     </span>
                   </div>

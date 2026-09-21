@@ -1,44 +1,73 @@
 @import "tailwindcss";
 
 /*
-  Haze Agent Suite — refined dark editorial system.
-  Warm graphite surfaces, ivory ink, a single muted ember accent,
-  elegant serif for display and a clean grotesque for UI.
-  Deliberately quiet: no neon, no holo-gradients, no scanlines.
+  Haze Agent Suite — ROM editorial system.
+  Cream light theme, ink type, single nautical-navy accent.
+  Refined dark mode preserved via prefers-color-scheme.
 */
 @theme {
-  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Fraunces", ui-serif, Georgia, serif;
-  --font-head: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cinzel", ui-serif, Georgia, serif;
+  --font-head: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  --color-void: #0a0b0d;
-  --color-abyss: #101114;
-  --color-panel: #15161a;
-  --color-panel-2: #1b1d23;
+  --color-void: var(--haze-bg);
+  --color-abyss: var(--haze-bg-2);
+  --color-panel: var(--haze-card);
+  --color-panel-2: var(--haze-elevated);
 
-  --color-line: rgba(244, 242, 237, 0.1);
-  --color-line-soft: rgba(244, 242, 237, 0.06);
+  --color-line: var(--haze-border);
+  --color-line-soft: var(--haze-border-soft);
 
-  --color-haze: #e2574b;
-  --color-haze-soft: #ef7a6d;
-  --color-volt: #8faecf;
-  --color-mint: #7fc8a0;
-  --color-amber: #e0b36b;
-  --color-violet: #b39ff2;
+  --color-haze: var(--haze-accent);
+  --color-haze-soft: var(--haze-accent-soft);
+  --color-volt: var(--haze-accent);
+  --color-mint: var(--haze-mint);
+  --color-amber: var(--haze-accent);
+  --color-violet: var(--haze-accent);
 
-  --color-ink: #f4f2ed;
-  --color-ink-soft: #b4b1a8;
-  --color-muted: #7a776e;
+  --color-ink: var(--haze-ink);
+  --color-ink-soft: var(--haze-ink-soft);
+  --color-muted: var(--haze-muted);
 }
 
 :root {
-  --bg: #0a0b0d;
-  --accent: #e2574b;
-  --accent-soft: #ef7a6d;
-  --line: rgba(244, 242, 237, 0.1);
-  --line-soft: rgba(244, 242, 237, 0.06);
-  --glass: rgba(21, 22, 26, 0.7);
+  --haze-bg: #F9F8F6;
+  --haze-bg-2: #F2F0EC;
+  --haze-card: #FFFFFF;
+  --haze-elevated: #F1EFEA;
+  --haze-ink: #1A1A1A;
+  --haze-ink-soft: #57534E;
+  --haze-muted: #8A8578;
+  --haze-border: #E5E0D6;
+  --haze-border-soft: rgba(229, 224, 214, 0.7);
+  --haze-accent: #14337A;
+  --haze-accent-soft: #2F4C9E;
+  --haze-mint: #1F6E5C;
+
+  --bg: var(--haze-bg);
+  --accent: var(--haze-accent);
+  --accent-soft: var(--haze-accent-soft);
+  --line: var(--haze-border);
+  --line-soft: var(--haze-border-soft);
+  --glass: var(--haze-card);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --haze-bg: #0B1210;
+    --haze-bg-2: #0F1715;
+    --haze-card: #15201D;
+    --haze-elevated: #1A2623;
+    --haze-ink: #F3F6F5;
+    --haze-ink-soft: #C3CFCB;
+    --haze-muted: #8A9893;
+    --haze-border: #26332F;
+    --haze-border-soft: rgba(38, 51, 47, 0.7);
+    --haze-accent: #2EC4B0;
+    --haze-accent-soft: #5BD9C8;
+    --haze-mint: #2EC4B0;
+  }
 }
 
 * {
@@ -50,28 +79,78 @@ body,
 #root {
   height: 100%;
   background: var(--bg);
-  color: #f4f2ed;
-  font-family: "Instrument Sans", system-ui, sans-serif;
+  color: var(--haze-ink);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cinzel", ui-serif, Georgia, serif;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 3.6vw + 0.9rem, 3.5rem);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 1.2vw + 0.6rem, 1.5rem);
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  font-size: clamp(1.0625rem, 0.6vw + 0.8rem, 1.25rem);
+  line-height: 1.35;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+p {
+  font-size: clamp(1rem, 0.4vw + 0.95rem, 1.0625rem);
+  line-height: 1.65;
+}
+
+ul, ol {
+  line-height: 1.7;
+}
+li {
+  margin-bottom: 0.5rem;
+}
+ul li::marker, ol li::marker {
+  color: var(--accent);
+}
+
 ::selection {
-  background: rgba(226, 87, 75, 0.35);
-  color: #fff;
+  background: var(--accent);
+  color: #ffffff;
 }
 
 .font-display {
-  font-family: "Fraunces", ui-serif, Georgia, serif;
-  font-weight: 560;
+  font-family: "Cinzel", ui-serif, Georgia, serif;
+  font-weight: 700;
   letter-spacing: -0.01em;
 }
 .font-head {
-  font-family: "Instrument Sans", system-ui, sans-serif;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
 }
 .font-mono,
 code {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 /* quiet scrollbar */
@@ -80,12 +159,12 @@ code {
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0b0d;
+  background: var(--haze-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: #26282f;
+  background: var(--haze-border);
   border-radius: 12px;
-  border: 2px solid #0a0b0d;
+  border: 2px solid var(--haze-bg);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
@@ -94,26 +173,29 @@ code {
 /* ---------- surfaces ---------- */
 .panel {
   position: relative;
-  background: linear-gradient(180deg, #17181d, #14151a);
+  background: var(--haze-card);
   border: 1px solid var(--line);
   border-radius: 1rem;
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.03) inset,
-    0 18px 48px -30px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 1px 2px rgba(26, 26, 26, 0.04), 0 8px 24px rgba(26, 26, 26, 0.05);
 }
 
 .glass {
   background: var(--glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--line);
 }
 
 .glass-strong {
-  background: rgba(12, 13, 15, 0.88);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  background: var(--haze-card);
   border-bottom: 1px solid var(--line);
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px rgba(26, 26, 26, 0.1);
+  border-color: var(--accent);
 }
 
 .accent-edge {
@@ -125,9 +207,9 @@ code {
   left: 1.5rem;
   right: 1.5rem;
   top: -1px;
-  height: 1px;
-  background: linear-gradient(90deg, var(--accent), transparent 70%);
-  opacity: 0.7;
+  height: 2px;
+  background: var(--accent);
+  opacity: 0.85;
 }
 
 /* soft intro reveal */
@@ -149,78 +231,106 @@ code {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-radius: 999px;
+  border-radius: 9999px;
   padding: 0.7rem 1.6rem;
-  font-family: "Instrument Sans", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
   transition:
-    transform 0.15s ease,
+    transform 0.2s ease,
     background 0.2s ease,
     box-shadow 0.25s ease,
     border-color 0.2s ease;
   cursor: pointer;
 }
 .btn:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 .btn-primary {
-  background: var(--accent);
-  color: #17090a;
+  height: 3rem;
+  padding: 0.625rem 1.9rem;
+  background: var(--haze-ink);
+  color: var(--haze-bg);
+  border: 1px solid transparent;
 }
 .btn-primary:hover {
-  background: var(--accent-soft);
+  background: #000000;
+  border-color: var(--accent);
+  box-shadow: 0 14px 30px rgba(26, 26, 26, 0.18);
 }
 .btn-ghost {
-  background: transparent;
+  height: 3rem;
+  padding: 0.625rem 1.9rem;
+  background: var(--haze-card);
   border: 1px solid var(--line);
-  color: #f4f2ed;
+  color: var(--haze-ink);
 }
 .btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--haze-card));
 }
 
 /* form fields */
 .field {
   width: 100%;
-  background: #0d0e11;
+  background: var(--haze-card);
   border: 1px solid var(--line);
   border-radius: 0.9rem;
   padding: 0.75rem 1rem;
   font-size: 0.9rem;
-  color: #f4f2ed;
+  color: var(--haze-ink);
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .field::placeholder {
-  color: #7a776e;
+  color: var(--haze-muted);
 }
 .field:focus {
-  border-color: rgba(226, 87, 75, 0.55);
-  box-shadow: 0 0 0 3px rgba(226, 87, 75, 0.14);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
 }
 
 /* logo chip */
 .logo-tile {
-  background: #17181d;
+  background: var(--haze-card);
   border: 1px solid var(--line);
   border-radius: 0.9rem;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 1px 0 var(--haze-border-soft);
 }
 
 /* eyebrow label */
 .eyebrow {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 11px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--muted);
+  letter-spacing: 0.05em;
+  color: var(--haze-muted);
 }
 .eyebrow-accent {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 11px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+
+/* quiet meta label (replaces mono micro-labels) */
+.label-meta {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--haze-muted);
+}
+.label-accent {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--accent);
 }
 
@@ -247,13 +357,26 @@ code {
   }
 }
 
-/* ambient wash (tame: soft single tone, low blur) */
+/* clean flat bands (replaces aurora blobs — no blur, no glow) */
 .aurora {
   position: absolute;
-  border-radius: 9999px;
-  filter: blur(80px);
   pointer-events: none;
-  opacity: 0.5;
+}
+.band-wash {
+  position: absolute;
+  pointer-events: none;
+  width: 44rem;
+  max-width: 92vw;
+  height: 20rem;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+}
+.band-rule {
+  position: absolute;
+  pointer-events: none;
+  height: 2px;
+  background: var(--accent);
+  opacity: 0.18;
 }
 
 /* neutralized legacy helpers (keep classes inert) */
@@ -271,15 +394,15 @@ code {
 /* markdown output */
 .md-body {
   line-height: 1.75;
-  color: #b4b1a8;
+  color: var(--haze-ink-soft);
   font-size: 14px;
 }
 .md-body h1,
 .md-body h2,
 .md-body h3,
 .md-body h4 {
-  font-family: "Fraunces", Georgia, serif;
-  color: #f4f2ed;
+  font-family: "Cinzel", Georgia, serif;
+  color: var(--haze-ink);
   margin: 1.2em 0 0.5em;
   letter-spacing: -0.01em;
 }
@@ -301,16 +424,16 @@ code {
   margin: 0.3em 0;
 }
 .md-body code {
-  background: rgba(244, 242, 237, 0.08);
+  background: color-mix(in srgb, var(--haze-ink) 6%, transparent);
   border: 1px solid var(--line);
   border-radius: 6px;
   padding: 0.12em 0.45em;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 13px;
-  color: #ef9a90;
+  color: var(--accent);
 }
 .md-body pre {
-  background: #0b0c0e;
+  background: var(--haze-bg-2);
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 14px;
@@ -320,7 +443,7 @@ code {
 .md-body pre code {
   background: transparent;
   border: none;
-  color: #d6d2c8;
+  color: var(--haze-ink);
 }
 .md-body table {
   border-collapse: collapse;
@@ -335,8 +458,8 @@ code {
   text-align: left;
 }
 .md-body th {
-  background: rgba(226, 87, 75, 0.12);
-  font-family: "Instrument Sans", sans-serif;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 .no-scrollbar::-webkit-scrollbar {

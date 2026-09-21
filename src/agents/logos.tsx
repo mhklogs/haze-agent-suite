@@ -7,21 +7,21 @@ import type { JSX } from "react";
  */
 
 export const LOGO_COLORS: Record<string, string> = {
-  geoengine: "#FF3B5C",
-  supportops: "#FF8A3D",
-  pricepilot: "#FFC53D",
-  relevnt: "#4DE3FF",
-  codebridge: "#38BDF8",
-  researchsynth: "#C084FC",
-  testforge: "#4EF2BA",
-  edgemint: "#5EEAD4",
-  focusrank: "#A3E635",
-  marketforge: "#FB7185",
-  legalbeacon: "#FBBF24",
-  podcastforge: "#F472B6",
-  recruitauditor: "#60A5FA",
-  sentienthub: "#8F7BFF",
-  default: "#FF2E44",
+  geoengine: "var(--haze-accent)",
+  supportops: "var(--haze-accent)",
+  pricepilot: "var(--haze-accent)",
+  relevnt: "var(--haze-accent)",
+  codebridge: "var(--haze-accent)",
+  researchsynth: "var(--haze-accent)",
+  testforge: "var(--haze-accent)",
+  edgemint: "var(--haze-accent)",
+  focusrank: "var(--haze-accent)",
+  marketforge: "var(--haze-accent)",
+  legalbeacon: "var(--haze-accent)",
+  podcastforge: "var(--haze-accent)",
+  recruitauditor: "var(--haze-accent)",
+  sentienthub: "var(--haze-accent)",
+  default: "var(--haze-accent)",
 };
 
 const S = {
@@ -218,17 +218,11 @@ export function SuiteLogo({
       className={className}
       aria-hidden="true"
     >
-      <defs>
-        <linearGradient id="haze-suite-g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#FF2E44" />
-          <stop offset="1" stopColor="#4DE3FF" />
-        </linearGradient>
-      </defs>
-      <path d="M32 6l22 13v26L32 58 10 45V19z" stroke="url(#haze-suite-g)" strokeWidth="3.4" strokeLinejoin="round" fill="none" />
-      <path d="M21 17h22M21 32h22M21 47h22" stroke="#FF2E44" strokeWidth="2.8" strokeLinecap="round" />
-      <circle cx="32" cy="32" r="6.5" stroke="#4DE3FF" strokeWidth="2.4" fill="rgba(77,227,255,0.1)" />
-      <circle cx="32" cy="32" r="1.6" fill="#4DE3FF" />
-      <path d="M32 3.5v5M32 55.5v5" stroke="#FF2E44" strokeWidth="1.8" strokeLinecap="round" opacity="0.6" />
+      <path d="M32 6l22 13v26L32 58 10 45V19z" stroke="var(--haze-accent)" strokeWidth="3.4" strokeLinejoin="round" fill="none" />
+      <path d="M21 17h22M21 32h22M21 47h22" stroke="var(--haze-accent)" strokeWidth="2.8" strokeLinecap="round" />
+      <circle cx="32" cy="32" r="6.5" stroke="var(--haze-accent)" strokeWidth="2.4" fill="color-mix(in srgb, var(--haze-accent) 10%, transparent)" />
+      <circle cx="32" cy="32" r="1.6" fill="var(--haze-accent)" />
+      <path d="M32 3.5v5M32 55.5v5" stroke="var(--haze-accent)" strokeWidth="1.8" strokeLinecap="round" opacity="0.6" />
     </svg>
   );
 }

@@ -20,7 +20,7 @@ export default function Sidebar() {
         </span>
         <div className="min-w-0">
           <p className="font-display text-lg leading-none">Haze Agent Suite</p>
-          <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-muted">
+          <p className="label-meta mt-1.5">
             four focused agents · one plan
           </p>
         </div>
@@ -28,7 +28,7 @@ export default function Sidebar() {
 
       <nav className="flex-1 overflow-y-auto no-scrollbar px-3 py-5 space-y-7">
         <div>
-          <p className="px-2 pb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+          <p className="label-meta px-2 pb-2">
             workspace
           </p>
           <div className="space-y-1">
@@ -45,7 +45,7 @@ export default function Sidebar() {
                   className={
                     active
                       ? "flex items-center gap-3 rounded-xl border border-haze/30 bg-haze/12 px-3 py-2.5 text-sm font-medium text-ink"
-                      : "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-ink-soft transition hover:bg-white/5 hover:text-ink"
+                      : "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-ink-soft transition hover:bg-black/5 hover:text-ink"
                   }
                 >
                   <Icon className="h-4 w-4" />
@@ -57,7 +57,7 @@ export default function Sidebar() {
         </div>
 
         <div>
-          <p className="px-2 pb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+          <p className="label-meta px-2 pb-2">
             agents
           </p>
           <div className="space-y-1">
@@ -71,8 +71,8 @@ export default function Sidebar() {
                   title={`${agent.name} — free trial`}
                   className={
                     active
-                      ? "flex items-center gap-3 rounded-xl border border-line bg-white/6 px-3 py-2 text-sm font-medium text-ink"
-                      : "flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-ink-soft transition hover:bg-white/5 hover:text-ink"
+                      ? "flex items-center gap-3 rounded-xl border border-line bg-black/5 px-3 py-2 text-sm font-medium text-ink"
+                      : "flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-ink-soft transition hover:bg-black/5 hover:text-ink"
                   }
                 >
                   <span className="flex h-7 w-7 shrink-0 items-center justify-center">
@@ -97,7 +97,7 @@ export default function Sidebar() {
           </div>
           <Link
             to="/agents/geoengine"
-            className="mt-4 block rounded-full bg-haze py-2 text-center text-sm font-semibold text-[#17090a] transition hover:bg-haze-soft"
+            className="mt-4 block rounded-full bg-[#1A1A1A] py-2 text-center text-sm font-semibold text-[#F9F8F6] transition hover:-translate-y-0.5 hover:bg-black hover:shadow-lg"
           >
             Start a free trial
           </Link>

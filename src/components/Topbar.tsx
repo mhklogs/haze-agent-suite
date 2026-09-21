@@ -15,7 +15,7 @@ export default function Topbar() {
       <div className="flex h-16 items-center gap-3 px-4">
         <button
           onClick={() => setOpen(!open)}
-          className="rounded-lg p-2 hover:bg-white/5"
+          className="rounded-lg p-2 hover:bg-black/5"
           aria-label="Menu"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -25,7 +25,7 @@ export default function Topbar() {
             <SuiteLogo size={26} />
           </span>
           <div className="min-w-0">
-            <p className="font-head text-[15px] font-semibold leading-none">Haze Agent Suite</p>
+            <p className="font-display text-[15px] font-semibold leading-none">Haze Agent Suite</p>
             {agent ? (
               <p className="mt-1 flex items-center gap-1 text-[11px] text-muted">
                 {agent.name}
@@ -37,7 +37,7 @@ export default function Topbar() {
         </Link>
         <Link
           to="/agents/geoengine"
-          className="ml-auto shrink-0 rounded-full bg-haze px-4 py-1.5 text-xs font-semibold text-[#17090a]"
+          className="ml-auto shrink-0 rounded-full bg-[#1A1A1A] px-4 py-1.5 text-xs font-semibold text-[#F9F8F6] transition hover:bg-black"
         >
           Free trial
         </Link>
@@ -58,7 +58,7 @@ export default function Topbar() {
               className={
                 pathname === item.to
                   ? "flex items-center gap-2 rounded-lg border border-haze/30 bg-haze/12 px-3 py-2.5 text-sm font-medium text-ink"
-                  : "flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-ink-soft hover:bg-white/5 hover:text-ink"
+                  : "flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-ink-soft hover:bg-black/5 hover:text-ink"
               }
             >
               {item.to.startsWith("/agents/") && (

@@ -64,14 +64,14 @@ export default function Pricing() {
         <div className="text-center">
           <p className="inline-flex items-center gap-2.5 rounded-full border border-line bg-panel px-4 py-1.5">
             <span className="pulse-dot flex h-2 w-2 rounded-full bg-haze" />
-            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+            <span className="label-meta">
               one plan · every agent
             </span>
           </p>
-          <h1 className="mx-auto mt-8 max-w-3xl font-display text-5xl leading-[1.08] md:text-6xl">
+          <h1 className="mx-auto mt-8 max-w-3xl font-display text-4xl leading-[1.08] md:text-5xl">
             Every agent free to try.
             <br />
-            <em className="text-haze-soft">One plan to run them all.</em>
+            <em className="text-haze not-italic">One plan to run them all.</em>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
             No per-agent billing, no surprise invoices. Every agent includes one
@@ -116,11 +116,11 @@ export default function Pricing() {
               }
             >
               {t.highlight && (
-                <span className="absolute -top-3 right-6 rounded-full bg-haze px-3 py-1 font-mono text-[10px] font-medium uppercase tracking-wider text-[#17090a]">
+                <span className="absolute -top-3 right-6 rounded-full bg-haze px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#F9F8F6]">
                   {t.tag}
                 </span>
               )}
-              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
+              <p className="label-meta">
                 {t.name}
               </p>
               <p className="mt-4 font-display text-5xl leading-none">
@@ -195,7 +195,7 @@ export default function Pricing() {
             ].map((s) => (
               <div key={s.l} className="rounded-2xl border border-line bg-panel p-5 text-center">
                 <p className="font-display text-3xl">{s.v}</p>
-                <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
+                <p className="label-meta mt-1.5">
                   {s.l}
                 </p>
               </div>

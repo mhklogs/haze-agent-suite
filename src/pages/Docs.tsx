@@ -76,7 +76,7 @@ export default function Docs() {
             <SuiteLogo size={40} />
           </span>
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-haze">
+            <p className="label-accent">
               read the manual
             </p>
             <h1 className="mt-2 font-display text-4xl leading-tight md:text-5xl">
