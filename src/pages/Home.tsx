@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronDown, ShieldCheck, CircleCheck, Terminal, Repeat } from "lucide-react";
-import ParticleField from "../components/ParticleField";
-import TiltCard from "../components/TiltCard";
+import {
+  ArrowRight,
+  ChevronDown,
+  ShieldCheck,
+  CircleCheck,
+  Users,
+  Repeat,
+  FileSearch,
+} from "lucide-react";
 import ScrollReveal from "../components/ScrollReveal";
 import { AGENTS } from "../agents/config";
 import { AgentLogo, SuiteLogo } from "../agents/logos";
@@ -10,16 +16,16 @@ const HOW = [
   {
     n: "01",
     title: "Pick a mission",
-    text: "Audit, triage, reprice, migrate, test, draft, produce — choose the agent that owns the job you are doing today.",
+    text: "Audit, triage, reprice, draft, produce — choose the agent that owns the job you are doing today.",
   },
   {
     n: "02",
     title: "Run a free trial",
-    text: "Every agent gets one full free trial. Paste your real work, not a demo file. No card, no account friction.",
+    text: "Every agent gets one full free trial. Paste your real work, not a demo file. No card, no friction.",
   },
   {
     n: "03",
-    title: "Put it on shift",
+    title: "Bring it into your week",
     text: "One plan unlocks every agent. Keep the ones that change your workflow, add the rest when you are ready.",
   },
 ];
@@ -28,7 +34,7 @@ const PILLARS = [
   {
     icon: ShieldCheck,
     title: "Audited output, by default",
-    text: "Each agent ships with a pinned scoring rubric and an agent-critic loop, so results come back scored, cited and ready to act on — not stream-of-consciousness text.",
+    text: "Each agent ships with a pinned scoring rubric and a critique loop, so results come back scored, cited and ready to act on — not stream-of-consciousness text.",
   },
   {
     icon: Repeat,
@@ -36,9 +42,9 @@ const PILLARS = [
     text: "Feed in your website copy, your tickets, your SKUs, your contracts. Every agent works on the actual context you bring, not canned examples.",
   },
   {
-    icon: Terminal,
-    title: "One brain, fourteen roles",
-    text: "One shared runner means one mental model. Swap agents in and out of your workflow without relearning a new tool for every task.",
+    icon: Users,
+    title: "One team, fourteen roles",
+    text: "One shared workspace means one mental model. Swap agents in and out of your workflow without learning a new tool for every task.",
   },
 ];
 
@@ -49,13 +55,13 @@ const PRAISE = [
     c: "B2B SaaS, 40-person team",
   },
   {
-    q: "SupportOps handled the first pass on every escalated ticket last month. Tiering, root-cause guesses and a draft reply in under a minute — the team only touches the queue now.",
-    n: "Head of Customer Ops",
+    q: "SupportOps handled the first pass on every escalated ticket last month. Tiering, root-cause notes and a draft reply in under a minute — the team only touches the queue now.",
+    n: "Head of Customer Operations",
     c: "Fintech scale-up",
   },
   {
-    q: "I described a 40-step checkout flow once and TestForge produced a Playwright suite that ran clean on the first pass. That alone pays for the subscription.",
-    n: "Staff SDET",
+    q: "I described a 40-step checkout flow once and the testing agent produced a suite that ran clean on the first pass. That alone pays for the subscription.",
+    n: "Staff Engineer",
     c: "E-commerce marketplace",
   },
 ];
@@ -67,7 +73,7 @@ const FAQS = [
   },
   {
     q: "What does one subscription cover?",
-    a: "A single plan unlocks all fourteen agents. There is no per-agent seat fee and no surprise billing when you switch to a different role.",
+    a: "A single plan unlocks all fourteen agents. There are no per-agent fees and no surprise billing when you switch to a different role.",
   },
   {
     q: "Where does my data go?",
@@ -75,15 +81,15 @@ const FAQS = [
   },
   {
     q: "Do I need to be technical to use it?",
-    a: "No. Every agent accepts plain language and returns plain English results. The verdicts, tables and fix lists are written for the person doing the job, not for a machine.",
+    a: "No. Every agent accepts plain language and returns plain English. The verdicts, tables and fix lists are written for the person doing the job, not for a machine.",
   },
 ];
 
 function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div className="text-center">
-      <p className="font-display text-3xl text-glow-white md:text-4xl">{value}</p>
-      <p className="mt-1 text-[11px] uppercase tracking-[0.22em] text-muted">{label}</p>
+      <p className="font-display text-4xl leading-none md:text-5xl">{value}</p>
+      <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">{label}</p>
     </div>
   );
 }
@@ -93,71 +99,61 @@ export default function Home() {
     <div>
       {/* ================= HERO ================= */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <ParticleField density={520} />
-          <div className="absolute inset-0 hud-grid" />
-          <div className="aurora -top-32 left-1/4 h-80 w-80 bg-[#FF2E44]/18" />
-          <div className="aurora top-10 right-[8%] h-72 w-72 bg-[#4DE3FF]/12" />
-          <div className="absolute -bottom-16 left-1/2 h-64 w-[130%] -translate-x-1/2 rounded-[100%] bg-[#FF2E44]/8 blur-3xl" />
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="aurora -top-40 left-1/4 h-96 w-96 bg-[#E2574B]/25" />
+          <div className="aurora top-8 right-[6%] h-80 w-80 bg-[#8FAECF]/18" />
         </div>
 
-        <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-16 text-center md:px-6 md:pt-24">
+        <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-20 text-center md:px-6 md:pt-28">
           <ScrollReveal>
-            <div className="inline-flex items-center gap-2.5 rounded-full glass px-4 py-1.5 text-xs tracking-wide">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-line bg-panel px-4 py-1.5">
               <span className="pulse-dot flex h-2 w-2 rounded-full bg-haze" />
-              <span className="font-head font-semibold uppercase tracking-[0.18em] text-ink-soft">
-                Haze Agent Suite · 14 autonomous operatives
+              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+                Haze Agent Suite
               </span>
             </div>
           </ScrollReveal>
 
-          <ScrollReveal delay={80}>
-            <h1 className="mx-auto mt-8 max-w-4xl font-display text-4xl uppercase leading-[1.02] tracking-tight md:text-7xl">
+          <ScrollReveal delay={70}>
+            <h1 className="mx-auto mt-8 max-w-4xl font-display text-5xl leading-[1.06] md:text-7xl">
               Your team runs on{" "}
-              <span className="text-glow-haze text-haze">fourteen AI agents.</span>
+              <em className="text-haze-soft">fourteen focused agents.</em>
             </h1>
           </ScrollReveal>
 
-          <ScrollReveal delay={160}>
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg">
-              One command center that audits your search visibility, triages support,
-              reprices for margin, migrates your code, drafts your contracts and
-              produces your podcast. Pick an agent, run it free on your real work,
-              and put it on the shift.
+          <ScrollReveal delay={140}>
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
+              One quiet workspace that audits your search visibility, triages
+              support, reprices for margin and produces your podcast. Pick an
+              agent, run it free on your real work, and bring it into the team.
             </p>
           </ScrollReveal>
 
-          <ScrollReveal delay={240}>
+          <ScrollReveal delay={210}>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-              <Link
-                to="/agents/geoengine"
-                className="group inline-flex items-center gap-2 rounded-xl bg-haze px-7 py-3.5 font-head font-semibold text-white shadow-[0_0_44px_-10px_rgba(255,46,68,0.9)] transition hover:bg-[#FF4B5E]"
-              >
+              <Link to="/agents/geoengine" className="btn btn-primary">
                 Try any agent free
-                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link
-                to="/pricing"
-                className="inline-flex items-center gap-2 rounded-xl glass px-7 py-3.5 font-head font-semibold text-white transition hover:bg-white/5"
-              >
+              <Link to="/pricing" className="btn btn-ghost">
                 View pricing
               </Link>
             </div>
-            <p className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-mono text-muted">
-              <span className="flex items-center gap-1.5">
-                <CircleCheck className="h-3.5 w-3.5 text-mint" /> One free trial per agent
+            <p className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+              <span className="inline-flex items-center gap-1.5">
+                <CircleCheck className="h-3.5 w-3.5 text-mint" /> one free trial per agent
               </span>
-              <span className="flex items-center gap-1.5">
-                <CircleCheck className="h-3.5 w-3.5 text-mint" /> No credit card to start
+              <span className="inline-flex items-center gap-1.5">
+                <CircleCheck className="h-3.5 w-3.5 text-mint" /> no credit card
               </span>
-              <span className="flex items-center gap-1.5">
-                <CircleCheck className="h-3.5 w-3.5 text-mint" /> Runs on your data
+              <span className="inline-flex items-center gap-1.5">
+                <CircleCheck className="h-3.5 w-3.5 text-mint" /> runs on your data
               </span>
             </p>
           </ScrollReveal>
 
-          <ScrollReveal delay={320}>
-            <div className="mt-14 grid grid-cols-2 gap-6 border-t border-line/60 pt-8 sm:grid-cols-4">
+          <ScrollReveal delay={280}>
+            <div className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-x-6 gap-y-10 border-t border-line pt-10 sm:grid-cols-4">
               <Stat value="14" label="agents, one plan" />
               <Stat value="60s" label="to first result" />
               <Stat value="0" label="per-agent fees" />
@@ -167,29 +163,27 @@ export default function Home() {
         </div>
 
         <div className="relative flex justify-center pb-8">
-          <ChevronDown className="h-6 w-6 animate-bounce text-muted" />
+          <ChevronDown className="h-5 w-5 text-muted" />
         </div>
       </section>
 
       {/* ================= ROSTER ================= */}
       <section className="mx-auto max-w-6xl px-5 pb-24 md:px-6">
         <ScrollReveal>
-          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="font-head text-sm font-semibold uppercase tracking-[0.24em] text-haze">
-                the roster
-              </p>
-              <h2 className="mt-1 font-display text-3xl uppercase tracking-tight md:text-5xl">
+              <p className="eyebrow-accent">the agents</p>
+              <h2 className="mt-3 font-display text-4xl leading-tight md:text-5xl">
                 Pick the agent, own the job
               </h2>
-              <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-soft md:text-base">
-                Fourteen specialists, one subscription. Every one of them runs a free
-                trial on your actual work before you spend a cent.
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
+                Fourteen specialists, one subscription. Every one of them runs a
+                free trial on your actual work before you spend a cent.
               </p>
             </div>
             <Link
               to="/pricing"
-              className="inline-flex items-center gap-2 font-head text-sm font-semibold text-haze transition hover:text-haze-soft"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-haze transition hover:text-haze-soft"
             >
               Compare plans <ArrowRight className="h-4 w-4" />
             </Link>
@@ -198,33 +192,32 @@ export default function Home() {
 
         <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {AGENTS.map((agent, i) => (
-            <ScrollReveal key={agent.id} delay={(i % 3) * 90}>
+            <ScrollReveal key={agent.id} delay={(i % 3) * 80}>
               <Link to={`/agents/${agent.id}`} className="group block h-full">
-                <TiltCard className="panel hover-glow h-full p-6">
+                <div className="panel flex h-full flex-col p-6 transition duration-300 group-hover:-translate-y-1 group-hover:border-haze/25">
                   <div className="flex items-start justify-between">
                     <span
-                      className="logo-tile flex h-14 w-14 items-center justify-center transition group-hover:scale-105"
-                      style={{ borderColor: `${agent.accent}55` }}
+                      className="logo-tile flex h-14 w-14 items-center justify-center border"
+                      style={{ borderColor: `${agent.accent}44` }}
                     >
                       <AgentLogo id={agent.id} size={34} />
                     </span>
-                    <span className="font-mono text-xs text-muted">{agent.code}</span>
                   </div>
-                  <h3 className="mt-5 font-head text-xl font-semibold uppercase tracking-wide">
-                    {agent.name}
-                  </h3>
-                  <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.18em]" style={{ color: agent.accent }}>
+                  <h3 className="mt-5 font-display text-2xl leading-snug">{agent.name}</h3>
+                  <p className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.16em]" style={{ color: agent.accent }}>
                     {agent.tagline}
                   </p>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-soft">{agent.blurb}</p>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">{agent.blurb}</p>
 
-                  <div className="mt-5 flex items-center justify-between border-t border-line/60 pt-4">
-                    <span className="font-head text-sm font-semibold" style={{ color: agent.accent }}>
+                  <div className="mt-6 flex items-center justify-between border-t border-line-soft pt-4">
+                    <span className="text-sm font-semibold" style={{ color: agent.accent }}>
                       Run free trial
                     </span>
-                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" style={{ color: agent.accent }} />
+                    <ArrowRight
+                      className="h-4 w-4 text-muted transition group-hover:translate-x-1 group-hover:text-haze"
+                    />
                   </div>
-                </TiltCard>
+                </div>
               </Link>
             </ScrollReveal>
           ))}
@@ -232,28 +225,26 @@ export default function Home() {
       </section>
 
       {/* ================= HOW IT WORKS ================= */}
-      <section className="border-y border-line/60 bg-abyss py-20">
+      <section className="border-y border-line bg-abyss py-20">
         <div className="mx-auto max-w-6xl px-5 md:px-6">
           <ScrollReveal>
-            <p className="text-center font-head text-sm font-semibold uppercase tracking-[0.24em] text-volt">
-              three steps
-            </p>
-            <h2 className="mx-auto mt-2 max-w-2xl text-center font-display text-3xl uppercase tracking-tight md:text-5xl">
+            <p className="eyebrow-accent text-center">three steps</p>
+            <h2 className="mx-auto mt-3 max-w-2xl text-center font-display text-4xl leading-tight md:text-5xl">
               From idea to output in a minute
             </h2>
           </ScrollReveal>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
             {HOW.map((s, i) => (
-              <ScrollReveal key={s.n} delay={i * 100}>
-                <div className="panel p-7">
-                  <div className="flex items-center justify-between">
-                    <span className="font-display text-4xl text-line opacity-80" style={{ color: "var(--muted)" }}>
-                      {s.n}
+              <ScrollReveal key={s.n} delay={i * 90}>
+                <div className="panel h-full p-7">
+                  <div className="flex items-baseline justify-between">
+                    <span className="font-display text-4xl text-muted">{s.n}</span>
+                    <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+                      step {s.n}
                     </span>
-                    {i < 2 && <ArrowRight className="hidden h-5 w-5 text-muted md:block" />}
                   </div>
-                  <h3 className="mt-4 font-head text-lg font-semibold uppercase tracking-wide">{s.title}</h3>
+                  <h3 className="mt-6 text-xl font-semibold text-ink">{s.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-soft">{s.text}</p>
                 </div>
               </ScrollReveal>
@@ -266,30 +257,28 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-5 py-20 md:px-6">
         <ScrollReveal>
           <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-start">
-            <div>
+            <div className="lg:sticky lg:top-24">
               <div className="flex items-center gap-3">
-                <span className="logo-tile flex h-14 w-14 items-center justify-center">
+                <span className="logo-tile flex h-14 w-14 items-center justify-center border" style={{ borderColor: "var(--line)" }}>
                   <SuiteLogo size={40} />
                 </span>
                 <div>
-                  <p className="font-head text-sm font-semibold uppercase tracking-[0.24em] text-haze">
-                    why haze
-                  </p>
-                  <h2 className="font-display text-2xl uppercase tracking-tight md:text-3xl">
+                  <p className="eyebrow-accent">why haze</p>
+                  <h2 className="mt-2 font-display text-3xl leading-tight md:text-4xl">
                     Built for work that ships
                   </h2>
                 </div>
               </div>
-              <p className="mt-5 text-sm leading-relaxed text-ink-soft md:text-base">
-                Haze is designed the way your ops or QA team actually works: score
+              <p className="mt-5 text-base leading-relaxed text-ink-soft">
+                Haze is designed the way an ops or QA team actually works: score
                 everything, prove everything, ship everything. The agents are
-                deterministic where it matters and creative where it helps.
+                careful where it matters and creative where it helps.
               </p>
               <Link
                 to="/docs"
-                className="mt-6 inline-flex items-center gap-2 font-head text-sm font-semibold text-volt transition hover:text-white"
+                className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-haze transition hover:text-haze-soft"
               >
-                Read the technical docs <ArrowRight className="h-4 w-4" />
+                Browse the docs <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
 
@@ -298,12 +287,12 @@ export default function Home() {
                 const Icon = f.icon;
                 return (
                   <ScrollReveal key={f.title} delay={i * 90}>
-                    <div className="accent-edge panel flex flex-col gap-4 p-6 sm:flex-row sm:items-start">
-                      <span className="logo-tile flex h-12 w-12 shrink-0 items-center justify-center" style={{ borderColor: "var(--line)" }}>
+                    <div className="panel flex flex-col gap-4 p-6 sm:flex-row sm:items-start">
+                      <span className="logo-tile flex h-12 w-12 shrink-0 items-center justify-center">
                         <Icon className="h-5 w-5 text-haze" />
                       </span>
                       <div>
-                        <h3 className="font-head text-lg font-semibold">{f.title}</h3>
+                        <h3 className="text-lg font-semibold text-ink">{f.title}</h3>
                         <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">{f.text}</p>
                       </div>
                     </div>
@@ -316,27 +305,25 @@ export default function Home() {
       </section>
 
       {/* ================= PRAISE ================= */}
-      <section className="border-y border-line/60 bg-abyss py-20">
+      <section className="border-y border-line bg-abyss py-20">
         <div className="mx-auto max-w-6xl px-5 md:px-6">
           <ScrollReveal>
-            <p className="text-center font-head text-sm font-semibold uppercase tracking-[0.24em] text-mint">
-              team reports
-            </p>
-            <h2 className="mx-auto mt-2 max-w-2xl text-center font-display text-3xl uppercase tracking-tight md:text-4xl">
+            <p className="eyebrow-accent text-center">from the teams</p>
+            <h2 className="mx-auto mt-3 max-w-2xl text-center font-display text-4xl leading-tight md:text-5xl">
               What teams do with the suite
             </h2>
           </ScrollReveal>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
             {PRAISE.map((t, i) => (
               <ScrollReveal key={t.n} delay={i * 90}>
                 <figure className="panel flex h-full flex-col p-7">
-                  <blockquote className="flex-1 text-sm leading-relaxed text-ink-soft">
+                  <blockquote className="flex-1 text-[15px] leading-relaxed text-ink-soft">
                     "{t.q}"
                   </blockquote>
-                  <figcaption className="mt-6 border-t border-line/60 pt-4">
-                    <p className="font-head text-sm font-semibold">{t.n}</p>
-                    <p className="mt-0.5 font-mono text-xs text-muted">{t.c}</p>
+                  <figcaption className="mt-7 border-t border-line-soft pt-5">
+                    <p className="font-semibold text-ink">{t.n}</p>
+                    <p className="mt-0.5 text-sm text-muted">{t.c}</p>
                   </figcaption>
                 </figure>
               </ScrollReveal>
@@ -348,21 +335,21 @@ export default function Home() {
       {/* ================= FAQ ================= */}
       <section className="mx-auto max-w-3xl px-5 py-20 md:px-6">
         <ScrollReveal>
-          <p className="text-center font-head text-sm font-semibold uppercase tracking-[0.24em] text-amber">
-            straight answers
-          </p>
-          <h2 className="mt-2 text-center font-display text-3xl uppercase tracking-tight md:text-4xl">
+          <p className="eyebrow-accent text-center">straight answers</p>
+          <h2 className="mt-3 text-center font-display text-4xl leading-tight md:text-5xl">
             Before you ask
           </h2>
         </ScrollReveal>
 
-        <div className="mt-10 space-y-3">
+        <div className="mt-11 space-y-3">
           {FAQS.map((f, i) => (
-            <ScrollReveal key={f.q} delay={i * 60}>
+            <ScrollReveal key={f.q} delay={i * 50}>
               <details className="panel group overflow-hidden">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-4 font-head font-semibold">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-4 font-medium text-ink">
                   {f.q}
-                  <span className="text-xl leading-none text-haze transition-transform group-open:rotate-45">+</span>
+                  <span className="text-xl font-light leading-none text-haze transition-transform group-open:rotate-45">
+                    +
+                  </span>
                 </summary>
                 <p className="px-6 pb-5 text-sm leading-relaxed text-ink-soft">{f.a}</p>
               </details>
@@ -372,34 +359,25 @@ export default function Home() {
       </section>
 
       {/* ================= CTA ================= */}
-      <section className="relative overflow-hidden pb-24">
-        <div className="absolute inset-0 -z-10">
-          <ParticleField density={220} speed={0.0002} />
-          <div className="absolute inset-0 hud-grid" />
-        </div>
+      <section className="mx-auto max-w-4xl px-5 pb-24 md:px-6">
         <ScrollReveal>
-          <div className="accent-edge panel mx-auto max-w-4xl p-8 text-center md:p-12">
-            <p className="font-head text-sm font-semibold uppercase tracking-[0.24em] text-haze">
-              go operational
-            </p>
-            <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl uppercase tracking-tight md:text-5xl">
+          <div className="accent-edge panel p-9 text-center md:p-14">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center">
+              <FileSearch className="h-7 w-7 text-haze" />
+            </div>
+            <p className="eyebrow-accent mt-7">start tonight</p>
+            <h2 className="mx-auto mt-3 max-w-2xl font-display text-4xl leading-tight md:text-5xl">
               Run your first agent on real work tonight
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-ink-soft md:text-base">
-              One free trial on every agent. Keep the ones that earn their pay, then
-              unlock the whole roster with a single plan.
+            <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
+              One free trial on every agent. Keep the ones that earn their place,
+              then unlock the whole team with a single plan.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link
-                to="/agents/geoengine"
-                className="inline-flex items-center gap-2 rounded-xl bg-haze px-8 py-3.5 font-head font-semibold text-white shadow-[0_0_44px_-10px_rgba(255,46,68,0.9)] transition hover:bg-[#FF4B5E]"
-              >
+            <div className="mt-9 flex flex-wrap justify-center gap-3">
+              <Link to="/agents/geoengine" className="btn btn-primary">
                 Start free trial <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link
-                to="/pricing"
-                className="inline-flex items-center gap-2 rounded-xl glass px-8 py-3.5 font-head font-semibold transition hover:bg-white/5"
-              >
+              <Link to="/pricing" className="btn btn-ghost">
                 See pricing
               </Link>
             </div>

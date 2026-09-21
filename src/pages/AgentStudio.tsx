@@ -4,7 +4,6 @@ import ReactMarkdown from "react-markdown";
 import {
   Copy,
   Check,
-  Cpu,
   Play,
   Clock,
   Trash2,
@@ -14,7 +13,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { getAgent, AGENTS } from "../agents/config";
-import { runAgentStreaming, hasApiKey, AUTH_MESSAGE, MODEL } from "../lib/gemini";
+import { runAgentStreaming, hasApiKey, AUTH_MESSAGE } from "../lib/gemini";
 import { GEO_SAMPLES, SUPPORT_TICKETS, SKU_ROWS } from "../data/samples";
 import { AgentLogo } from "../agents/logos";
 
@@ -150,21 +149,16 @@ export default function AgentStudio() {
           <AgentLogo id={agent.id} size={40} />
         </span>
         <div className="min-w-0">
-          <div className="flex flex-wrap items-center gap-2">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-              {agent.code} · autonomous module
-            </p>
-            <span
-              className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-white"
-              style={{ background: `${agent.accent}26`, color: agent.accent }}
-            >
-              <CircleCheck className="h-3 w-3" /> Free trial · one per agent
-            </span>
-          </div>
-          <h1 className="mt-1 font-display text-3xl uppercase tracking-tight md:text-5xl">
+          <span
+            className="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-mono text-[10px]"
+            style={{ borderColor: `${agent.accent}55`, color: agent.accent }}
+          >
+            <CircleCheck className="h-3 w-3" /> Free trial included
+          </span>
+          <h1 className="mt-2 font-display text-4xl leading-tight md:text-5xl">
             {agent.name}
           </h1>
-          <p className="mt-1 font-mono text-xs uppercase tracking-[0.2em]" style={{ color: agent.accent }}>
+          <p className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.18em]" style={{ color: agent.accent }}>
             {agent.tagline}
           </p>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">
@@ -177,12 +171,9 @@ export default function AgentStudio() {
         {/* Composer */}
         <div className="panel p-5">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <label className="font-head text-sm font-semibold text-white">
+            <label className="font-head text-sm font-semibold text-ink">
               {agent.inputLabel}
             </label>
-            <span className="flex items-center gap-1.5 rounded-full bg-white/5 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-muted">
-              <Cpu className="h-3 w-3" style={{ color: agent.accent }} /> {MODEL}
-            </span>
           </div>
 
           <textarea
@@ -224,7 +215,7 @@ export default function AgentStudio() {
           <button
             onClick={() => run()}
             disabled={streaming || !input.trim()}
-            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-haze px-6 py-3.5 font-head font-semibold text-white shadow-[0_0_36px_-10px_rgba(255,46,68,0.9)] transition hover:bg-[#FF4B5E] disabled:cursor-not-allowed disabled:opacity-40"
+            className="btn btn-primary mt-4 w-full"
           >
             <Play className="h-4 w-4" />
             {streaming ? "Agent is reasoning…" : `Launch ${agent.name} trial`}
@@ -317,10 +308,10 @@ export default function AgentStudio() {
                 title={`Run ${a.name} trial`}
                 className={
                   active
-                    ? "inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-head font-semibold text-white"
+                    ? "inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-head font-semibold text-[#17090a]"
                     : "inline-flex items-center gap-2 rounded-xl bg-white/5 px-3 py-2 text-sm text-ink-soft transition hover:bg-white/10 hover:text-white"
                 }
-                style={active ? { background: a.accent, boxShadow: `0 0 26px -8px ${a.accent}` } : undefined}
+                style={active ? { background: a.accent } : undefined}
               >
                 <AgentLogo id={a.id} size={20} stroke={false} />
                 <span className="hidden sm:inline">{a.name}</span>

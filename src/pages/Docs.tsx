@@ -19,7 +19,7 @@ function Block({
           <span className="logo-tile flex h-10 w-10 items-center justify-center">
             <Icon className="h-5 w-5 text-haze" />
           </span>
-          <h2 className="font-head text-xl font-semibold uppercase tracking-wider">{title}</h2>
+          <h2 className="font-head text-xl font-semibold text-ink">{title}</h2>
         </div>
         <div className="mt-5 text-sm leading-relaxed text-ink-soft">{children}</div>
       </div>
@@ -33,7 +33,7 @@ flowchart LR
   A[Browser UI] --> B[React 19 + Vite SPA]
   B --> C[Agent Runner lib/gemini.ts]
   C --> D[GoogleGenAI SDK]
-  D --> E[(Gemini 2.5 Flash)]
+  D --> E[(Reasoning tier)]
   C --> F[Agent prompts<br/>agents/config.ts]
   F --> C
   B --> G[Data layer<br/>data/samples.ts]
@@ -76,10 +76,10 @@ export default function Docs() {
             <SuiteLogo size={40} />
           </span>
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-haze">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-haze">
               read the manual
             </p>
-            <h1 className="mt-1 font-display text-3xl uppercase tracking-tight md:text-5xl">
+            <h1 className="mt-2 font-display text-4xl leading-tight md:text-5xl">
               Docs & architecture
             </h1>
             <p className="mt-2 max-w-2xl text-ink-soft">
@@ -98,9 +98,9 @@ export default function Docs() {
 ├── agents/logos.tsx        # bespoke vector logos for the suite + agents
 ├── lib/gemini.ts           # streaming Gemini runner + provider switch
 ├── data/samples.ts         # GEO sites, support tickets, SKU rows
-├── components/             # ParticleField, Sidebar, Topbar, TiltCard, ScrollReveal
+├── components/             # Sidebar, Topbar, ScrollReveal
 ├── pages/                  # Home · AgentStudio · Pricing · Docs
-└── theme/scheme.ts         # brand tokens (void / #FF2E44 accent)`}
+└── theme/scheme.ts         # brand tokens (void / ember accent)`}
           </pre>
         </Block>
 
@@ -145,13 +145,13 @@ export default function Docs() {
         <div className="mt-12 flex flex-wrap justify-center gap-3">
           <Link
             to="/agents/geoengine"
-            className="inline-flex items-center gap-2 rounded-xl bg-haze px-8 py-3.5 font-head font-semibold text-white shadow-[0_0_36px_-10px_rgba(255,46,68,0.9)] transition hover:bg-[#FF4B5E]"
+            className="btn btn-primary"
           >
             Open the suite
           </Link>
           <Link
             to="/pricing"
-            className="inline-flex items-center gap-2 rounded-xl glass px-8 py-3.5 font-head font-semibold transition hover:bg-white/5"
+            className="btn btn-ghost"
           >
             Pricing & trials
           </Link>

@@ -31,7 +31,7 @@ const TIERS = [
       "Everything in Starter",
       "2,000 requests / month across all agents",
       "Unlimited streaming + run history",
-      "Choice of Gemini 2.5 Pro / Flash",
+      "Choose your preferred reasoning tier",
       "Batch runs + saved agent presets",
       "Export to PDF / Markdown",
       "Priority support",
@@ -59,41 +59,46 @@ const TIERS = [
 
 export default function Pricing() {
   return (
-    <div className="mx-auto max-w-6xl px-5 py-14 md:px-6">
+    <div className="mx-auto max-w-6xl px-5 py-16 md:px-6">
       <ScrollReveal>
         <div className="text-center">
-          <p className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 font-mono text-xs uppercase tracking-[0.18em] text-ink-soft">
+          <p className="inline-flex items-center gap-2.5 rounded-full border border-line bg-panel px-4 py-1.5">
             <span className="pulse-dot flex h-2 w-2 rounded-full bg-haze" />
-            one plan · every agent
+            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+              one plan · every agent
+            </span>
           </p>
-          <h1 className="mt-6 font-display text-4xl uppercase tracking-tight md:text-6xl">
+          <h1 className="mx-auto mt-8 max-w-3xl font-display text-5xl leading-[1.08] md:text-6xl">
             Every agent free to try.
             <br />
-            <span className="text-glow-haze text-haze">One plan to run them.</span>
+            <em className="text-haze-soft">One plan to run them all.</em>
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-ink-soft md:text-lg">
-            No per-agent billing, no surprise invoices. Every agent includes one free
-            trial on your real work — then a single subscription unlocks all fourteen.
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
+            No per-agent billing, no surprise invoices. Every agent includes one
+            free trial on your real work — then a single subscription unlocks all
+            fourteen.
           </p>
         </div>
       </ScrollReveal>
 
-      <ScrollReveal delay={120}>
-        <div className="accent-edge panel mt-12 flex flex-col items-center gap-4 p-6 text-center sm:flex-row sm:justify-between sm:text-left">
-          <div className="flex flex-col items-center gap-3 sm:flex-row">
+      <ScrollReveal delay={90}>
+        <div className="accent-edge panel mt-14 flex flex-col items-center gap-5 p-7 text-center sm:flex-row sm:justify-between sm:text-left">
+          <div className="flex flex-col items-center gap-4 sm:flex-row">
             <span className="logo-tile flex h-12 w-12 shrink-0 items-center justify-center">
-              <Gift className="h-5 w-5 text-mint" />
+              <Gift className="h-5 w-5 text-haze" />
             </span>
             <div>
-              <p className="font-head text-lg font-semibold">Try all {AGENTS.length} agents — one free trial each</p>
-              <p className="mt-0.5 text-sm text-ink-soft">
-                No credit card. Trials run on the data you paste, and the verdict is yours to keep.
+              <p className="text-lg font-semibold text-ink">
+                Try all {AGENTS.length} agents — one free trial each
+              </p>
+              <p className="mt-1 text-sm text-ink-soft">
+                No credit card. Trials run on the data you paste, and the result is yours to keep.
               </p>
             </div>
           </div>
           <Link
             to="/agents/geoengine"
-            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-haze px-6 py-3 font-head font-semibold text-white shadow-[0_0_36px_-10px_rgba(255,46,68,0.9)] transition hover:bg-[#FF4B5E]"
+            className="btn btn-primary shrink-0"
           >
             Claim a trial <ArrowRight className="h-4 w-4" />
           </Link>
@@ -102,31 +107,29 @@ export default function Pricing() {
 
       <div className="mt-12 grid gap-6 md:grid-cols-3">
         {TIERS.map((t, i) => (
-          <ScrollReveal key={t.name} delay={i * 90}>
+          <ScrollReveal key={t.name} delay={i * 80}>
             <div
               className={
                 t.highlight
-                  ? "relative h-full rounded-2xl border border-haze/60 bg-panel p-7 neon-ring"
-                  : "relative h-full rounded-2xl border border-line bg-panel p-7"
+                  ? "relative flex h-full flex-col rounded-2xl border border-haze/45 bg-panel p-7"
+                  : "relative flex h-full flex-col rounded-2xl border border-line bg-panel p-7"
               }
             >
               {t.highlight && (
-                <span className="absolute -top-3 right-6 rounded-full bg-haze px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-white">
+                <span className="absolute -top-3 right-6 rounded-full bg-haze px-3 py-1 font-mono text-[10px] font-medium uppercase tracking-wider text-[#17090a]">
                   {t.tag}
                 </span>
               )}
-              <p className="font-head text-sm font-semibold uppercase tracking-[0.22em] text-muted">
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
                 {t.name}
               </p>
-              <p className="mt-3 font-display text-5xl">
+              <p className="mt-4 font-display text-5xl leading-none">
                 {t.price}
-                <span className="font-sans text-sm text-muted"> {t.period}</span>
+                <span className="font-sans text-base font-normal text-muted"> {t.period}</span>
               </p>
-              <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-soft">
-                {t.tag}
-              </p>
+              <p className="mt-2 text-[13px] text-ink-soft">{t.tag}</p>
 
-              <ul className="mt-6 space-y-2.5">
+              <ul className="mt-7 flex-1 space-y-2.5">
                 {t.features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5 text-sm text-ink-soft">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-mint" />
@@ -134,7 +137,7 @@ export default function Pricing() {
                   </li>
                 ))}
                 {t.off.map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-sm text-muted/70">
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-muted/80">
                     <Minus className="mt-0.5 h-4 w-4 shrink-0" />
                     {f}
                   </li>
@@ -149,11 +152,11 @@ export default function Pricing() {
                     window.location.href = "mailto:ops@haze.labs?subject=Business plan";
                   }
                 }}
-                className={`mt-7 inline-flex w-full items-center justify-center gap-2 rounded-xl py-3 font-head text-sm font-semibold transition ${
+                className={
                   t.highlight
-                    ? "bg-haze text-white hover:bg-[#FF4B5E]"
-                    : "bg-white/5 text-white hover:bg-white/10"
-                }`}
+                    ? "btn btn-primary mt-8 w-full"
+                    : "btn btn-ghost mt-8 w-full"
+                }
               >
                 {t.cta} <ArrowRight className="h-4 w-4" />
               </Link>
@@ -163,35 +166,36 @@ export default function Pricing() {
       </div>
 
       <ScrollReveal>
-        <div className="mt-16 rounded-2xl border border-line bg-abyss p-8">
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start">
-              <CircleCheck className="h-6 w-6 shrink-0 text-volt" />
+        <div className="mt-16 rounded-2xl border border-line bg-abyss p-9">
+          <div className="flex flex-col items-center justify-between gap-5 sm:flex-row">
+            <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start">
+              <CircleCheck className="h-6 w-6 shrink-0 text-haze" />
               <div className="text-center sm:text-left">
-                <p className="font-head font-semibold">Wholesale for agencies</p>
+                <p className="text-lg font-semibold text-ink">Wholesale for agencies</p>
                 <p className="mt-1 max-w-xl text-sm text-ink-soft">
-                  Resell white-labeled agent workspaces to your own clients. Volume pricing, shared support and custom prompts from 10 seats.
+                  Resell white-labeled agent workspaces to your own clients. Volume
+                  pricing, shared support and custom prompts from ten seats.
                 </p>
               </div>
             </div>
             <a
               href="mailto:ops@haze.labs?subject=Wholesale%20access"
-              className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white/5 px-6 py-3 font-head text-sm font-semibold transition hover:bg-white/10"
+              className="btn btn-ghost shrink-0"
             >
               Talk to us <ArrowRight className="h-4 w-4" />
             </a>
           </div>
 
-          <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div className="mt-9 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {[
               { v: `${AGENTS.length}`, l: "agents included" },
               { v: "1", l: "free trial each" },
               { v: "99.9%", l: "uptime SLA (business)" },
               { v: "No", l: "per-agent fees" },
             ].map((s) => (
-              <div key={s.l} className="rounded-xl bg-white/5 p-4 text-center">
-                <p className="font-display text-2xl text-glow-white">{s.v}</p>
-                <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-muted">
+              <div key={s.l} className="rounded-2xl border border-line bg-panel p-5 text-center">
+                <p className="font-display text-3xl">{s.v}</p>
+                <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
                   {s.l}
                 </p>
               </div>

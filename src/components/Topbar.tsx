@@ -25,24 +25,19 @@ export default function Topbar() {
             <SuiteLogo size={26} />
           </span>
           <div className="min-w-0">
-            <p className="font-head text-sm font-bold tracking-[0.08em] leading-none">
-              HAZE AGENT SUITE
-            </p>
+            <p className="font-head text-[15px] font-semibold leading-none">Haze Agent Suite</p>
             {agent ? (
-              <p className="mt-0.5 flex items-center gap-1 font-mono text-[10px] text-muted">
-                <AgentLogo id={agent.id} size={12} stroke={false} />
-                {agent.name} · {agent.code}
+              <p className="mt-1 flex items-center gap-1 text-[11px] text-muted">
+                {agent.name}
               </p>
             ) : (
-              <p className="mt-0.5 truncate font-mono text-[10px] text-muted">
-                {AGENTS.length} agents · one command center
-              </p>
+              <p className="mt-1 truncate text-[11px] text-muted">Fourteen agents · one plan</p>
             )}
           </div>
         </Link>
         <Link
           to="/agents/geoengine"
-          className="ml-auto shrink-0 rounded-lg bg-haze px-3 py-1.5 font-head text-xs font-semibold text-white"
+          className="ml-auto shrink-0 rounded-full bg-haze px-4 py-1.5 text-xs font-semibold text-[#17090a]"
         >
           Free trial
         </Link>
@@ -51,8 +46,8 @@ export default function Topbar() {
       {open && (
         <div className="glass-strong max-h-[70vh] space-y-1 overflow-y-auto border-t border-line px-3 py-3">
           {[
-            { to: "/", label: "Command Center" },
-            { to: "/pricing", label: "Pricing & Trials" },
+            { to: "/", label: "Home" },
+            { to: "/pricing", label: "Pricing" },
             { to: "/docs", label: "Docs" },
             ...AGENTS.map((a) => ({ to: `/agents/${a.id}`, label: a.name })),
           ].map((item) => (
@@ -62,8 +57,8 @@ export default function Topbar() {
               onClick={() => setOpen(false)}
               className={
                 pathname === item.to
-                  ? "flex items-center gap-2 rounded-lg border border-haze/40 bg-haze/15 px-3 py-2.5 text-sm"
-                  : "flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-ink-soft hover:bg-white/5 hover:text-white"
+                  ? "flex items-center gap-2 rounded-lg border border-haze/30 bg-haze/12 px-3 py-2.5 text-sm font-medium text-ink"
+                  : "flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-ink-soft hover:bg-white/5 hover:text-ink"
               }
             >
               {item.to.startsWith("/agents/") && (
