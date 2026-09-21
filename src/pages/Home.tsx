@@ -1,16 +1,95 @@
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
+  ArrowUpRight,
   ChevronDown,
   ShieldCheck,
   CircleCheck,
   Users,
   Repeat,
   FileSearch,
+  Home as HomeIcon,
+  type LucideIcon,
 } from "lucide-react";
 import ScrollReveal from "../components/ScrollReveal";
 import { AGENTS } from "../agents/config";
 import { AgentLogo, SuiteLogo } from "../agents/logos";
+
+const PRODUCTS: {
+  name: string;
+  url: string;
+  desc: string;
+  logo?: string;
+  icon?: LucideIcon;
+}[] = [
+  {
+    name: "Optimared",
+    url: "https://optimared-ai-pricing-agent.vercel.app",
+    desc: "AI dynamic pricing that maximizes margin without killing sales velocity, with a safety floor under every SKU.",
+    logo: "pricepilot",
+  },
+  {
+    name: "GEO Engine",
+    url: "https://geoengineai.vercel.app",
+    desc: "Audits your pages against how ChatGPT, Gemini, Claude and Perplexity retrieve and cite them, with a scored fix plan.",
+    logo: "geoengine",
+  },
+  {
+    name: "SupportOps",
+    url: "https://support-escalation-hub.vercel.app",
+    desc: "An autonomous escalation hub that tiers tickets, triages root cause from logs and drafts the customer reply.",
+    logo: "supportops",
+  },
+  {
+    name: "Relevnt",
+    url: "https://relevnt-navy.vercel.app",
+    desc: "Scores content against a target topic and shows exactly which relevance gaps to close first.",
+    logo: "relevnt",
+  },
+  {
+    name: "ResearchSynth",
+    url: "https://scientific-research-synthesis-agent.vercel.app",
+    desc: "Turns messy notes and abstracts into a structured, cited synthesis with claim-by-claim confidence.",
+    logo: "researchsynth",
+  },
+  {
+    name: "RecruitAuditor",
+    url: "https://ai-recruitment-auditor.vercel.app",
+    desc: "AI CV screening that emits a compatibility score and a QA-style interview test matrix.",
+    logo: "recruitauditor",
+  },
+  {
+    name: "Sentient Hub",
+    url: "https://sentient-ai-multimodal-hub.vercel.app",
+    desc: "One terminal to reason across text, images and audio at the same time.",
+    logo: "sentienthub",
+  },
+  {
+    name: "MarketForge",
+    url: "https://marketforge-kappa.vercel.app",
+    desc: "Campaign briefs, localized ad copy and short-form storyboards for a product in seconds.",
+    logo: "marketforge",
+  },
+  {
+    name: "PodcastForge",
+    url: "https://ai-powered-podcast-agent.vercel.app",
+    desc: "Turns a topic into a research brief, a full episode script and broadcast-ready show notes.",
+    logo: "podcastforge",
+  },
+  {
+    name: "FixIt Home",
+    url: "https://fixit-rouge.vercel.app",
+    desc: "Homeowners post a job, verified pros bid live, and you only pay when the work is done.",
+    icon: HomeIcon,
+  },
+];
+
+const STATS = [
+  { value: "14", label: "agents, one plan" },
+  { value: "60s", label: "to first result" },
+  { value: "0", label: "per-agent fees" },
+  { value: "∞", label: "your data, scored" },
+];
 
 const HOW = [
   {
@@ -154,10 +233,9 @@ export default function Home() {
 
           <ScrollReveal delay={280}>
             <div className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-x-6 gap-y-10 border-t border-line pt-10 sm:grid-cols-4">
-              <Stat value="14" label="agents, one plan" />
-              <Stat value="60s" label="to first result" />
-              <Stat value="0" label="per-agent fees" />
-              <Stat value="∞" label="your data, scored" />
+              {STATS.map((s) => (
+                <Stat key={s.label} value={s.value} label={s.label} />
+              ))}
             </div>
           </ScrollReveal>
         </div>
@@ -221,6 +299,56 @@ export default function Home() {
               </Link>
             </ScrollReveal>
           ))}
+        </div>
+      </section>
+
+      {/* ================= STANDALONE PRODUCTS ================= */}
+      <section className="border-t border-line bg-abyss py-20">
+        <div className="mx-auto max-w-6xl px-5 md:px-6">
+          <ScrollReveal>
+            <div className="mb-12">
+              <p className="eyebrow-accent">live products</p>
+              <h2 className="mt-3 font-display text-4xl leading-tight md:text-5xl">
+                The standalone products
+              </h2>
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
+                The same agents, shipped as their own focused products. Each one
+                runs live and stays free to try on your real work.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            {PRODUCTS.map((p, i) => (
+              <ScrollReveal key={p.name} delay={(i % 3) * 80}>
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group block h-full"
+                >
+                  <div className="panel flex h-full flex-col p-6 transition duration-300 group-hover:-translate-y-1 group-hover:border-haze/25">
+                    <span
+                      className="logo-tile flex h-14 w-14 items-center justify-center border"
+                      style={{ borderColor: "var(--line)" }}
+                    >
+                      {p.logo && AGENTS.some((a) => a.id === p.logo) ? (
+                        <AgentLogo id={p.logo} size={34} />
+                      ) : p.icon ? (
+                        <p.icon className="h-6 w-6 text-haze" />
+                      ) : null}
+                    </span>
+                    <h3 className="mt-5 font-display text-2xl leading-snug">{p.name}</h3>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">{p.desc}</p>
+                    <div className="mt-6 flex items-center justify-between border-t border-line-soft pt-4">
+                      <span className="text-sm font-semibold text-haze">Open live site</span>
+                      <ArrowUpRight className="h-4 w-4 text-muted transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-haze" />
+                    </div>
+                  </div>
+                </a>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
 
