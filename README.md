@@ -98,6 +98,17 @@ vercel --prod                     # deploy
 - **v2.0** — team workspaces, audit logs, public API + webhooks
 - **v2.1** — multimodal drag-and-drop uploads
 
+> Roadmap above is the product vision; the delivery plan, sprint schedule and
+> backlog that sit behind it are in `documents/08-roadmap.md`.
+
+---
+
+## What changed (v3)
+
+- v1→v2: research-based market analysis + SDLC documentation (`documents/01–07`).
+- v2→v3: delivery roadmap with sprint plan and ceremonies (`documents/08-roadmap.md`); this changelog. No source code changed in this pass.
+- Known issue now on the backlog (PBI-01): `VITE_GEMINI_API_KEY` is inlined into the public bundle, so the deployed key is extractable by anyone. It is being moved behind a server-side proxy.
+
 ---
 
 ## License
